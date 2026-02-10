@@ -1,0 +1,842 @@
+[
+  {
+    "id": "Vacances de la Toussaint_2017-10-20T22:00:00+00:00_2017-11-05T23:00:00+00:00",
+    "nom": "Vacances de la Toussaint",
+    "label": "Vacances de la Toussaint",
+    "annee": "2017",
+    "debut": "2017-10-20T22:00:00+00:00",
+    "fin": "2017-11-05T23:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2017-10-22",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-10-23",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-10-24",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-10-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-10-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2017-10-29",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-10-30",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-10-31",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-11-01",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-11-02",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2017-11-05",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  },
+  {
+    "id": "Vacances de Noël_2017-12-22T23:00:00+00:00_2018-01-07T23:00:00+00:00",
+    "nom": "Vacances de Noël",
+    "label": "Vacances de Noël",
+    "annee": "2017-2018",
+    "debut": "2017-12-22T23:00:00+00:00",
+    "fin": "2018-01-07T23:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2017-12-24",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-12-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-12-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-12-27",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2017-12-28",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2017-12-31",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-01-01",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-01-02",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-01-03",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-01-04",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-01-07",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  },
+  {
+    "id": "Vacances d'Hiver_2018-02-16T23:00:00+00:00_2018-03-04T23:00:00+00:00",
+    "nom": "Vacances d'Hiver",
+    "label": "Vacances d'Hiver",
+    "annee": "2018",
+    "debut": "2018-02-16T23:00:00+00:00",
+    "fin": "2018-03-04T23:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2018-02-18",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-02-19",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-02-20",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-02-21",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-02-22",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-02-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-02-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-02-27",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-02-28",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-03-01",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-03-04",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  },
+  {
+    "id": "Vacances de Printemps_2018-04-13T22:00:00+00:00_2018-04-29T22:00:00+00:00",
+    "nom": "Vacances de Printemps",
+    "label": "Vacances de Printemps",
+    "annee": "2018",
+    "debut": "2018-04-13T22:00:00+00:00",
+    "fin": "2018-04-29T22:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2018-04-15",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-16",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-17",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-18",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-19",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-04-22",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-23",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-24",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-04-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-04-29",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  },
+  {
+    "id": "Vacances d'Été_2018-07-06T22:00:00+00:00_2018-08-30T22:00:00+00:00",
+    "nom": "Vacances d'Été",
+    "label": "Vacances d'Été",
+    "annee": "2018",
+    "debut": "2018-07-06T22:00:00+00:00",
+    "fin": "2018-08-30T22:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2018-07-08",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-09",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-10",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-11",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-12",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-07-15",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-16",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-17",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-18",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-19",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-07-22",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-23",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-24",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-07-29",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-30",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-07-31",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-01",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-02",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-08-05",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-06",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-07",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-08",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-09",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-08-12",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-13",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-14",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-15",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-16",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-08-19",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-20",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-21",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-22",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-23",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-08-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-27",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-28",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-29",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-08-30",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  },
+  {
+    "id": "Vacances de Noël_2018-12-21T23:00:00+00:00_2019-01-06T23:00:00+00:00",
+    "nom": "Vacances de Noël",
+    "label": "Vacances de Noël",
+    "annee": "2018-2019",
+    "debut": "2018-12-21T23:00:00+00:00",
+    "fin": "2019-01-06T23:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2018-12-23",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-12-24",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-12-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-12-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-12-27",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2018-12-30",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2018-12-31",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-01-01",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-01-02",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-01-03",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2019-01-06",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  },
+  {
+    "id": "Vacances d'Hiver_2019-02-22T23:00:00+00:00_2019-03-10T23:00:00+00:00",
+    "nom": "Vacances d'Hiver",
+    "label": "Vacances d'Hiver",
+    "annee": "2019",
+    "debut": "2019-02-22T23:00:00+00:00",
+    "fin": "2019-03-10T23:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2019-02-24",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-02-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-02-26",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-02-27",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-02-28",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2019-03-03",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-03-04",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-03-05",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-03-06",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-03-07",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2019-03-10",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  },
+  {
+    "id": "Vacances de Printemps_2019-04-19T22:00:00+00:00_2019-05-05T22:00:00+00:00",
+    "nom": "Vacances de Printemps",
+    "label": "Vacances de Printemps",
+    "annee": "2019",
+    "debut": "2019-04-19T22:00:00+00:00",
+    "fin": "2019-05-05T22:00:00+00:00",
+    "semaines": [
+      [
+        {
+          "date": "2019-04-21",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-04-22",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-04-23",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-04-24",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-04-25",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2019-04-28",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-04-29",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-04-30",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-05-01",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        },
+        {
+          "date": "2019-05-02",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ],
+      [
+        {
+          "date": "2019-05-05",
+          "ferie": false,
+          "matin": null,
+          "apresmidi": null
+        }
+      ]
+    ]
+  }
+]

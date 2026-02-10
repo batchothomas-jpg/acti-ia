@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.25s ease-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+
+/* === DESIGN TOKENS ACM PRO/LUDIQUE === */
+
+:root {
+  --primary:   #4f7bff;   /* Bleu pro mais vivant */
+  --success:   #3ccb7c;   /* Vert animateur */
+  --warning:   #fbbf24;   /* Jaune ACM */
+  --danger:    #ef4444;   /* Rouge attention */
+  --accent:    #a855f7;   /* Violet ludique */
+  --info:      #06b6d4;   /* Cyan moderne */
+
+  --paper:     #f8fafc;   /* Fond doux */
+  --surface:   #ffffff;   /* Cartes */
+  --muted:     #64748b;   /* Gris pro */
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 3px 8px rgba(0,0,0,.1);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,.12);
+}
+
+html, body {
+  @apply bg-slate-50 text-slate-800 antialiased;
+    font-family: 'Inter', sans-serif;
+}
+
+
+h1, h2, h3, .title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+}
