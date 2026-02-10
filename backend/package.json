@@ -5,47 +5,43 @@
   "author": "Thomas Batcho",
   "main": "electron/main.js",
   "type": "module",
-
   "scripts": {
     "build:frontend": "npm run build --prefix frontend",
     "build:win": "npm run build:frontend && npx electron-builder --win --x64",
     "build": "npm run build:win"
   },
-
   "build": {
     "appId": "com.actiia.app",
     "productName": "Acti-IA",
     "asar": true,
-
     "directories": {
       "output": "dist"
     },
-
     "files": [
       "electron/**/*",
       "backend/**/*",
       "frontend/dist/**/*",
       "package.json"
     ],
-
     "win": {
       "target": "nsis",
       "icon": "electron/icon.ico",
       "sign": false,
       "signAndEditExecutable": false
     },
-
     "nsis": {
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true
     }
   },
-
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "electron": "^40.0.0",
     "electron-builder": "^26.4.0",
-    "wait-on": "^9.0.3",
-    "concurrently": "^9.2.1"
+    "wait-on": "^9.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.4"
   }
 }
