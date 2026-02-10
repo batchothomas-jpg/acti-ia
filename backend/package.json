@@ -1,52 +1,18 @@
 {
-  "name": "acti-ia",
+  "name": "acti-ia-backend",
   "version": "1.0.0",
-  "description": "Application professionnelle d’aide à l’animation ACM",
-  "author": "Thomas Batcho",
-  "main": "electron/main.js",
   "type": "module",
+  "main": "server.js",
   "scripts": {
-    "build:frontend": "npm run build --prefix frontend",
-    "build:win": "npm run build:frontend && npx electron-builder --win --x64",
-    "build": "npm run build:win"
-  },
-  "build": {
-    "appId": "com.actiia.app",
-    "productName": "Acti-IA",
-    "asar": true,
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "electron/**/*",
-      "backend/**/*",
-      "frontend/dist/**/*",
-      "package.json"
-    ],
-    "win": {
-      "target": "nsis",
-      "icon": "electron/icon.ico",
-      "sign": false,
-      "signAndEditExecutable": false
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true
-    }
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.1",
-    "electron": "^40.0.0",
-    "electron-builder": "^26.4.0",
-    "wait-on": "^9.0.3"
+    "start": "node server.js"
   },
   "dependencies": {
-    "dotenv": "^17.2.4",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^4.18.2",
-    "mongoose": "^9.1.5",
     "jsonwebtoken": "^9.0.3",
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.5"
+    "mongoose": "^9.1.5",
+    "axios": "^1.6.2"
   }
 }
