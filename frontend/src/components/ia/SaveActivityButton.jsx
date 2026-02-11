@@ -16,7 +16,7 @@ export default function SaveActivityButton({ activity }) {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:3001/api/activities", {
+      const res = await fetch("https://acti-ia.onrender.com/api/activities", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

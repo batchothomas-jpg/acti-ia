@@ -29,7 +29,7 @@ export default function Profile() {
   }
 
   try {
-    const res = await fetch("http://localhost:3001/api/users/change-password", {
+    const res = await fetch("https://acti-ia.onrender.com/api/users/change-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

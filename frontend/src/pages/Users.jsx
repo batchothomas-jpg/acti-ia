@@ -144,7 +144,7 @@ export default function Users() {
     onClick={async () => {
       if (!confirm("Réinitialiser toute la mémoire IA ?")) return;
 
-      await fetch("http://localhost:3001/api/ia/reset-memory", {
+      await fetch("https://acti-ia.onrender.com/api/ia/reset-memory", {
         method: "POST",
         credentials: "include"
       });

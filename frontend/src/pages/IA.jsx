@@ -67,7 +67,7 @@ useEffect(() => {
   }));
 
   try {
-    await fetch("http://localhost:3001/api/ia/feedback", {
+    await fetch("https://acti-ia.onrender.com/api/ia/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

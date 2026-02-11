@@ -18,7 +18,7 @@ export async function fetchUsers() {
 
 
 export async function createUser(data) {
-  const res = await fetch("http://localhost:3001/api/users", {
+  const res = await fetch("https://acti-ia.onrender.com/api/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export async function createUser(data) {
 export async function changePassword(payload) {
   const token = localStorage.getItem("token");
 
-  const res = await fetch("http://localhost:3001/api/users/change-password", {
+  const res = await fetch("https://acti-ia.onrender.com/api/users/change-password", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import { getAuthHeaders } from "./authService";
 
-const API_URL = "http://localhost:3001/api/materials";
+const API_URL = "https://acti-ia.onrender.com/api/materials";
 
 export async function fetchMaterials() {
   const res = await fetch(API_URL, {

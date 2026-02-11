@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api/activities";
+const API_URL = "https://acti-ia.onrender.com/api/activities";
 
 export async function fetchActivities() {
   const token = localStorage.getItem("token");
