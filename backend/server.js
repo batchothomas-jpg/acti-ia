@@ -21,7 +21,7 @@ const app = express();
 
 /* 🔐 MIDDLEWARES */
 app.use(cors({
-  origin: "*",
+  origin: "https://acti-ia.vercel.app",
   credentials: true,
 }));
 
