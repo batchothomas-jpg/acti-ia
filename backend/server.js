@@ -20,10 +20,23 @@ import User from "./models/User.js";
 const app = express();
 
 /* 🔐 MIDDLEWARES */
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://acti-ia.vercel.app",
+  "https://acti-lpv7vm6ut-batchothomas-jpgs-projects.vercel.app"
+];
+
 app.use(cors({
-  origin: "https://acti-ia.vercel.app",
-  credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
+
 
 app.use(express.json());
 
