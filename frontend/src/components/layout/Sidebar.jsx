@@ -1,52 +1,120 @@
 import { NavLink } from "react-router-dom";
+import {
+  Home,
+  Package,
+  Brain,
+  Calendar,
+  Umbrella,
+  Building2,
+  User,
+  LogOut,
+  Menu,
+  X
+} from "lucide-react";
+import { useState } from "react";
 import LogoutButton from "../auth/LogoutButton";
 
-const links = [
-  { label: "Tableau de Bord", to: "/" },
-  { label: "Gestion Utilisateur & Mémoires", to: "/users" },
-  { label: "Matériel", to: "/materiel" },
-  { label: "Planning ACM", to: "/planning-acm" },
-  { label: "Planning Vacances", to: "/planning-vacances" },
-  { label: "Création IA", to: "/ia" },
-  { label: "Activités enregistrées", to: "/activites" },
-];
+export default function Sidebar() {
+  const [open, setOpen] = useState(false);
 
-export default function Sidebar({ onClose, onLogout }) {
+  const links = [
+    { to: "/", label: "Dashboard", icon: Home },
+    { to: "/materiel", label: "Matériel", icon: Package },
+    { to: "/ia", label: "IA", icon: Brain },
+    { to: "/planning-acm", label: "Planning ACM", icon: Calendar },
+    { to: "/planning-vacances", label: "Planning Vacances", icon: Calendar },
+    { to: "/activites", label: "Activitées", icon: Building2 }
+  ];
+
   return (
-    <aside className="absolute left-0 top-0 h-full w-56 bg-white border-r shadow z-20 flex flex-col">
-      <div className="flex items-center justify-between p-4 border-b">
-        <span className="font-semibold">Menu</span>
-        <button
-          onClick={onClose}
-          className="text-xl hover:bg-gray-100 rounded px-2"
-        >
-          ✕
-        </button>
-      </div>
+    <>
+      {/* Bouton menu mobile */}
+      <button
+        onClick={() => setOpen(true)}
+        className="fixed top-3 left-3 z-50 md:hidden bg-white p-2 rounded shadow"
+      >
+        <Menu size={22} />
+      </button>
 
-      <nav className="flex flex-col gap-1 py-2">
-        {links.map(link => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            onClick={onClose}
-            className={({ isActive }) =>
-              `px-4 py-2 mx-2 rounded-md text-sm font-medium ${
-                isActive
-                  ? "bg-blue-100 text-blue-700"
-                  : "text-gray-700 hover:bg-gray-50"
-              }`
-            }
+      {/* Overlay mobile */}
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+        />
+      )}
+
+      <aside
+        className={`
+          fixed md:static z-50
+          top-0 left-0
+          h-screen
+          w-64 md:w-56
+          bg-white border-r
+          flex flex-col
+          transform transition-transform duration-300
+          ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}
+      >
+        {/* Header */}
+        <div className="h-14 flex items-center justify-between px-4 border-b">
+          <span className="font-semibold">Menu</span>
+          <button
+            onClick={() => setOpen(false)}
+            className="md:hidden"
           >
-            {link.label}
-          </NavLink>
-        ))}
-      </nav>
-          <LogoutButton onLogout={onLogout} />
+            <X />
+          </button>
+        </div>
 
-      <div className="mt-auto p-4 text-xs text-gray-400">
-        v1.0 • Acti-IA
-      </div>
-    </aside>
+        {/* Navigation */}
+        <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
+          {links.map(({ to, label, icon: Icon }) => (
+            <NavLink
+              key={to}
+              to={to}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `
+                flex items-center gap-3 px-3 py-2 rounded-lg
+                text-sm
+                ${
+                  isActive
+                    ? "bg-blue-100 text-blue-700 font-medium"
+                    : "hover:bg-gray-100"
+                }
+              `
+              }
+            >
+              <Icon size={18} />
+              <span>{label}</span>
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Footer */}
+        <div className="p-2 border-t space-y-1">
+          <NavLink
+            to="/profil"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 text-sm"
+          >
+            <User size={18} />
+            <span>Profil</span>
+          </NavLink>
+
+          <button
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = "/login";
+            }}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-red-600 hover:bg-red-50"
+          >
+            
+            <span><LogoutButton size={18} /></span>
+          </button>
+        </div>
+      </aside>
+    </>
   );
 }

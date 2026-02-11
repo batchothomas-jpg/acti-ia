@@ -1,4 +1,3 @@
-// src/pages/Activities.jsx
 import { useEffect, useState } from "react";
 import { fetchActivities } from "../services/activityService";
 import ActivityCard from "../components/activities/ActivityCard";
