@@ -1,49 +1,45 @@
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
-export default function generateACMPdf({ group, weeks }) {
-  if (!group) {
-    throw new Error("Groupe manquant");
-  }
+export function generateACMPdf(planning) {
+  const doc = new jsPDF({ orientation: "landscape" });
 
-  if (!weeks || !Array.isArray(weeks)) {
-    throw new Error("Weeks invalide");
-  }
+  const cellWidth = 90;
+  const cellHeight = 35;
+  const lineHeight = 5;
+  const maxLines = 6;
 
-  const doc = new jsPDF();
+  planning.forEach((day, index) => {
+    const x = 10;
+    const y = 20 + index * (cellHeight + 10);
 
-  // ===== TITRE =====
-  doc.setFontSize(16);
-  doc.text("Planning ACM", 14, 15);
+    doc.setFontSize(11);
+    doc.text(day.date || "", x, y);
 
-  doc.setFontSize(11);
-  doc.text(`Groupe : ${group}`, 14, 23);
+    const wrapText = (text) => {
+      const lines = doc.splitTextToSize(text || "", cellWidth - 4);
 
-  // ===== TABLE =====
-  const body = weeks.map((week) => [
-    `${week.label}\n${new Date(week.date).toLocaleDateString("fr-FR")}`,
-    week.morning || "",
-    week.afternoon || ""
-  ]);
+      if (lines.length > maxLines) {
+        return [
+          ...lines.slice(0, maxLines - 1),
+          lines[maxLines - 1] + "…",
+        ];
+      }
 
-  autoTable(doc, {
-    startY: 32,
-    head: [["Semaine", "Matin", "Après-midi"]],
-    body,
-    styles: {
-      fontSize: 9,
-      cellPadding: 3,
-      valign: "top"
-    },
-    headStyles: {
-      fillColor: [41, 128, 185]
-    },
-    columnStyles: {
-      0: { cellWidth: 40 },
-      1: { cellWidth: 70 },
-      2: { cellWidth: 70 }
-    }
+      return lines;
+    };
+
+    const morningLines = wrapText(day.morning);
+    const afternoonLines = wrapText(day.afternoon);
+
+    // Cadres
+    doc.rect(x, y + 4, cellWidth, cellHeight);
+    doc.rect(x + cellWidth + 10, y + 4, cellWidth, cellHeight);
+
+    // Textes
+    doc.setFontSize(10);
+    doc.text(morningLines, x + 2, y + 10);
+    doc.text(afternoonLines, x + cellWidth + 12, y + 10);
   });
 
-  doc.save(`planning-acm-${group}.pdf`);
+  doc.save("planning-acm.pdf");
 }

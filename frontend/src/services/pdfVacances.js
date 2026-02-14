@@ -1,37 +1,43 @@
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
-export function exportVacancesPDF({ data, group, period }) {
+export function generateVacancesPdf(planning) {
   const doc = new jsPDF({ orientation: "landscape" });
 
-  const today = new Date().toLocaleDateString("fr-FR");
+  const cellWidth = 60;
+  const cellHeight = 30;
+  const lineHeight = 4;
+  const maxLines = 5;
 
-  doc.setFontSize(11);
-  doc.text(`Centre : ${localStorage.getItem("centerName") || "Non défini"}`, 14, 14);
-  doc.text(`Service Animation`, 14, 20);
-  doc.text(`Groupe : ${group}`, 14, 26);
-  doc.text(`Période : ${period.nom} (${period.start} → ${period.end})`, 14, 32);
-  doc.text(`Établi le : ${today}`, 14, 38);
+  const wrapText = (text) => {
+    const lines = doc.splitTextToSize(text || "", cellWidth - 4);
 
-  const rows = data.map(d => [
-    d.date,
-    d.weekday,
-    d.activity || ""
-  ]);
-
-  autoTable(doc, {
-    startY: 46,
-    head: [["Date", "Jour", "Activité"]],
-    body: rows,
-    styles: {
-      fontSize: 9,
-      cellPadding: 2
-    },
-    headStyles: {
-      fillColor: [234, 88, 12], // orange
-      textColor: 255
+    if (lines.length > maxLines) {
+      return [
+        ...lines.slice(0, maxLines - 1),
+        lines[maxLines - 1] + "…",
+      ];
     }
+
+    return lines;
+  };
+
+  planning.forEach((week, wIndex) => {
+    const yStart = 15 + wIndex * 55;
+
+    doc.setFontSize(12);
+    doc.text(week.title || "", 10, yStart);
+
+    week.days.forEach((day, dIndex) => {
+      const x = 10 + dIndex * (cellWidth + 8);
+      const y = yStart + 5;
+
+      const lines = wrapText(day.activity);
+
+      doc.rect(x, y, cellWidth, cellHeight);
+      doc.setFontSize(9);
+      doc.text(lines, x + 2, y + 8);
+    });
   });
 
-  doc.save(`planning_vacances_${period.id}_${group}.pdf`);
+  doc.save("planning-vacances.pdf");
 }
