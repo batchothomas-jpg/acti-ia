@@ -4,9 +4,9 @@ export function generateVacancesPdf(planning) {
   const doc = new jsPDF({ orientation: "landscape" });
 
   const cellWidth = 60;
-  const cellHeight = 30;
-  const lineHeight = 4;
-  const maxLines = 5;
+  const cellHeight = 18; // une cellule matin / aprem
+  const spacingY = 6;
+  const maxLines = 3;
 
   const wrapText = (text) => {
     const lines = doc.splitTextToSize(text || "", cellWidth - 4);
@@ -22,20 +22,27 @@ export function generateVacancesPdf(planning) {
   };
 
   planning.forEach((week, wIndex) => {
-    const yStart = 15 + wIndex * 55;
+    const yStart = 15 + wIndex * 60;
 
     doc.setFontSize(12);
     doc.text(week.title || "", 10, yStart);
 
     week.days.forEach((day, dIndex) => {
       const x = 10 + dIndex * (cellWidth + 8);
-      const y = yStart + 5;
+      const yMorning = yStart + 5;
+      const yAfternoon = yMorning + cellHeight;
 
-      const lines = wrapText(day.activity);
+      const morningLines = wrapText(day.morning);
+      const afternoonLines = wrapText(day.afternoon);
 
-      doc.rect(x, y, cellWidth, cellHeight);
-      doc.setFontSize(9);
-      doc.text(lines, x + 2, y + 8);
+      // 📦 Cellule MATIN
+      doc.rect(x, yMorning, cellWidth, cellHeight);
+      doc.setFontSize(8);
+      doc.text(morningLines, x + 2, yMorning + 6);
+
+      // 📦 Cellule APRÈS-MIDI
+      doc.rect(x, yAfternoon, cellWidth, cellHeight);
+      doc.text(afternoonLines, x + 2, yAfternoon + 6);
     });
   });
 

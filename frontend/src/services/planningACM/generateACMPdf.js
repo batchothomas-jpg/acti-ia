@@ -4,41 +4,47 @@ export function generateACMPdf(planning) {
   const doc = new jsPDF({ orientation: "landscape" });
 
   const cellWidth = 90;
-  const cellHeight = 35;
-  const lineHeight = 5;
-  const maxLines = 6;
+  const cellHeight = 20; // une cellule par période
+  const daySpacing = 12;
+  const maxLines = 4;
+
+  const wrapText = (text) => {
+    const lines = doc.splitTextToSize(text || "", cellWidth - 6);
+
+    if (lines.length > maxLines) {
+      return [
+        ...lines.slice(0, maxLines - 1),
+        lines[maxLines - 1] + "…",
+      ];
+    }
+
+    return lines;
+  };
 
   planning.forEach((day, index) => {
     const x = 10;
-    const y = 20 + index * (cellHeight + 10);
+    const yBase = 20 + index * (cellHeight * 2 + daySpacing);
 
+    // 📅 Date
     doc.setFontSize(11);
-    doc.text(day.date || "", x, y);
-
-    const wrapText = (text) => {
-      const lines = doc.splitTextToSize(text || "", cellWidth - 4);
-
-      if (lines.length > maxLines) {
-        return [
-          ...lines.slice(0, maxLines - 1),
-          lines[maxLines - 1] + "…",
-        ];
-      }
-
-      return lines;
-    };
+    doc.text(day.date || "", x, yBase);
 
     const morningLines = wrapText(day.morning);
     const afternoonLines = wrapText(day.afternoon);
 
-    // Cadres
-    doc.rect(x, y + 4, cellWidth, cellHeight);
-    doc.rect(x + cellWidth + 10, y + 4, cellWidth, cellHeight);
+    const yMorning = yBase + 4;
+    const yAfternoon = yMorning + cellHeight;
 
-    // Textes
-    doc.setFontSize(10);
-    doc.text(morningLines, x + 2, y + 10);
-    doc.text(afternoonLines, x + cellWidth + 12, y + 10);
+    // 🌅 Cellule MATIN
+    doc.rect(x, yMorning, cellWidth, cellHeight);
+    doc.setFontSize(9);
+    doc.text("Matin :", x + 2, yMorning + 6);
+    doc.text(morningLines, x + 2, yMorning + 11);
+
+    // 🌇 Cellule APRÈS-MIDI
+    doc.rect(x, yAfternoon, cellWidth, cellHeight);
+    doc.text("Après-midi :", x + 2, yAfternoon + 6);
+    doc.text(afternoonLines, x + 2, yAfternoon + 11);
   });
 
   doc.save("planning-acm.pdf");
