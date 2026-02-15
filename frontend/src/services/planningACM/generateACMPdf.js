@@ -1,7 +1,7 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-export function generateACMPdf(planning) {
+export default function generateACMPdf(planning) {
   const doc = new jsPDF({ orientation: "portrait" });
 
   doc.setFontSize(18);
