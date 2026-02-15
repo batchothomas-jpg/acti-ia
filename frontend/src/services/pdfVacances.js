@@ -7,54 +7,64 @@ export function generateVacancesPdf(planning, group) {
   doc.setFontSize(18);
   doc.text(`Planning Vacances – ${group}`, 14, 20);
 
-  const tableData = [];
+  let startY = 30;
 
   planning.forEach(day => {
-    // 🌞 Ligne MATIN
-    tableData.push([
-      day.date,
-      "Matin",
-      day.morning || "-"
-    ]);
 
-    // 🌙 Ligne APRÈS-MIDI
-    tableData.push([
-      day.date,
-      "Après-midi",
-      day.afternoon || "-"
-    ]);
-  });
-
-  autoTable(doc, {
-    startY: 30,
-
-    head: [["Jour", "Moment", "Activité"]],
-
-    body: tableData,
-
-    styles: {
-      fontSize: 10,
-      cellPadding: 6,
-      valign: "top",
-      overflow: "linebreak",
-    },
-
-    columnStyles: {
-      0: { cellWidth: 35 },  // Jour
-      1: { cellWidth: 35 },  // Moment
-      2: { cellWidth: 120 }, // Activité
-    },
-
-    didParseCell: function (data) {
-      if (data.column.index === 1) {
-        if (data.cell.raw === "Matin") {
-          data.cell.styles.fillColor = [230, 242, 255];
-        }
-        if (data.cell.raw === "Après-midi") {
-          data.cell.styles.fillColor = [255, 240, 230];
-        }
+    // 📅 Titre du jour (ligne pleine largeur)
+    autoTable(doc, {
+      startY: startY,
+      body: [[{ content: day.date, styles: { halign: "center", fontStyle: "bold" } }]],
+      theme: "grid",
+      styles: { fontSize: 12 },
+      columnStyles: {
+        0: { cellWidth: 180 }
       }
-    }
+    });
+
+    startY = doc.lastAutoTable.finalY;
+
+    // 🌞 MATIN
+    autoTable(doc, {
+      startY: startY,
+      body: [
+        [{ content: "MATIN", styles: { fontStyle: "bold", fillColor: [230, 242, 255] } }],
+        [day.morning || "-"]
+      ],
+      theme: "grid",
+      styles: {
+        fontSize: 10,
+        cellPadding: 6,
+        overflow: "linebreak",
+        valign: "top"
+      },
+      columnStyles: {
+        0: { cellWidth: 180 }
+      }
+    });
+
+    startY = doc.lastAutoTable.finalY;
+
+    // 🌙 APRÈS-MIDI
+    autoTable(doc, {
+      startY: startY,
+      body: [
+        [{ content: "APRÈS-MIDI", styles: { fontStyle: "bold", fillColor: [255, 240, 230] } }],
+        [day.afternoon || "-"]
+      ],
+      theme: "grid",
+      styles: {
+        fontSize: 10,
+        cellPadding: 6,
+        overflow: "linebreak",
+        valign: "top"
+      },
+      columnStyles: {
+        0: { cellWidth: 180 }
+      }
+    });
+
+    startY = doc.lastAutoTable.finalY + 6; // espace entre les jours
   });
 
   doc.save(`planning-vacances-${group}.pdf`);
