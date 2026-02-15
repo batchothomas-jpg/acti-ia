@@ -1,50 +1,61 @@
 import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export function generateACMPdf(planning) {
-  const doc = new jsPDF({ orientation: "landscape" });
+  const doc = new jsPDF({ orientation: "portrait" });
 
-  const cellWidth = 90;
-  const cellHeight = 20; // une cellule par période
-  const daySpacing = 12;
-  const maxLines = 4;
+  doc.setFontSize(18);
+  doc.text("Planning ACM", 14, 20);
 
-  const wrapText = (text) => {
-    const lines = doc.splitTextToSize(text || "", cellWidth - 6);
+  const tableData = [];
 
-    if (lines.length > maxLines) {
-      return [
-        ...lines.slice(0, maxLines - 1),
-        lines[maxLines - 1] + "…",
-      ];
+  planning.forEach(day => {
+    tableData.push([
+      {
+        content: `${day.date}\n🌞 Matin`,
+        styles: { fontStyle: "bold" }
+      },
+      day.morning || "-"
+    ]);
+
+    tableData.push([
+      {
+        content: `${day.date}\n🌙 Après-midi`,
+        styles: { fontStyle: "bold" }
+      },
+      day.afternoon || "-"
+    ]);
+  });
+
+  autoTable(doc, {
+    startY: 30,
+    head: [["Jour / Moment", "Activité"]],
+    body: tableData,
+
+    styles: {
+      fontSize: 10,
+      cellPadding: 6,
+      valign: "top",
+      overflow: "linebreak",
+    },
+
+    columnStyles: {
+      0: { cellWidth: 55 },
+      1: { cellWidth: 135 },
+    },
+
+    bodyStyles: {
+      minCellHeight: 16,
+    },
+
+    didParseCell: function (data) {
+      if (data.row.raw[0].content.includes("🌞")) {
+        data.cell.styles.fillColor = [230, 242, 255];
+      }
+      if (data.row.raw[0].content.includes("🌙")) {
+        data.cell.styles.fillColor = [255, 240, 230];
+      }
     }
-
-    return lines;
-  };
-
-  planning.forEach((day, index) => {
-    const x = 10;
-    const yBase = 20 + index * (cellHeight * 2 + daySpacing);
-
-    // 📅 Date
-    doc.setFontSize(11);
-    doc.text(day.date || "", x, yBase);
-
-    const morningLines = wrapText(day.morning);
-    const afternoonLines = wrapText(day.afternoon);
-
-    const yMorning = yBase + 4;
-    const yAfternoon = yMorning + cellHeight;
-
-    // 🌅 Cellule MATIN
-    doc.rect(x, yMorning, cellWidth, cellHeight);
-    doc.setFontSize(9);
-    doc.text("Matin :", x + 2, yMorning + 6);
-    doc.text(morningLines, x + 2, yMorning + 11);
-
-    // 🌇 Cellule APRÈS-MIDI
-    doc.rect(x, yAfternoon, cellWidth, cellHeight);
-    doc.text("Après-midi :", x + 2, yAfternoon + 6);
-    doc.text(afternoonLines, x + 2, yAfternoon + 11);
   });
 
   doc.save("planning-acm.pdf");
