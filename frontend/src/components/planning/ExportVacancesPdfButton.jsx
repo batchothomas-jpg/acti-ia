@@ -22,7 +22,7 @@ export default function ExportVacancesPdfButton({
       format: "a4"
     });
 
-    /* 🟧 BANNIÈRE ORANGE */
+    /* 🟧 BANNIÈRE */
     doc.setFillColor(249, 115, 22);
     doc.rect(0, 0, 297, 20, "F");
 
@@ -38,7 +38,7 @@ export default function ExportVacancesPdfButton({
     weeks.forEach(week => {
       doc.setFontSize(12);
       doc.text(`Semaine ${week.index}`, 14, y);
-      y += 5;
+      y += 6;
 
       const head = [
         week.days.map(d =>
@@ -50,83 +50,56 @@ export default function ExportVacancesPdfButton({
         )
       ];
 
- const body = [
-  week.days.map(d => {
-    const a = activities[d.iso] || {};
+      const body = [
+        week.days.map(d => {
+          const a = activities[d.iso] || {};
 
-    return {
-      content:
-        "🌞 MATIN\n\n" +
-        (a.matin || "-") +
-        "\n\n──────────────\n\n" +
-        "🌙 APRÈS-MIDI\n\n" +
-        (a.apresMidi || "-"),
-      styles: {
-        valign: "top"
-      }
-    };
-  })
-];
+          return {
+            content:
+              "🌞 MATIN\n\n" +
+              (a.matin || "-") +
+              "\n\n\n━━━━━━━━━━━━━━━━━━━━\n\n" +
+              "🌙 APRÈS-MIDI\n\n" +
+              (a.apresMidi || "-"),
+            styles: {
+              valign: "top"
+            }
+          };
+        })
+      ];
 
+      autoTable(doc, {
+        startY: y,
+        head,
+        body,
+        theme: "grid",
 
-week.days.forEach(d => {
-  const a = activities[d.iso] || {};
+        styles: {
+          fontSize: 9,
+          cellPadding: 5,
+          overflow: "linebreak",
+          textColor: [0, 0, 0],
+          valign: "top"
+        },
 
-  body.push([
-    {
-      content: "🌞 MATIN",
-      styles: {
-        fillColor: [219, 234, 254],
-        fontStyle: "bold",
-        halign: "center"
-      }
-    }
-  ]);
+        headStyles: {
+          fillColor: [255, 237, 213],
+          textColor: [0, 0, 0],
+          fontStyle: "bold"
+        },
 
-  body.push([
-    {
-      content: a.matin || "-",
-      styles: { valign: "top" }
-    }
-  ]);
+        didParseCell: function (data) {
+          if (data.section === "body") {
+            const text = data.cell.raw.content || "";
 
-  body.push([
-    {
-      content: "🌙 APRÈS-MIDI",
-      styles: {
-        fillColor: [254, 226, 226],
-        fontStyle: "bold",
-        halign: "center"
-      }
-    }
-  ]);
+            if (text.includes("🌞 MATIN")) {
+              data.cell.styles.fillColor = [219, 234, 254]; // bleu clair
+            }
+          }
+        }
+      });
 
-  body.push([
-    {
-      content: a.apresMidi || "-",
-      styles: { valign: "top" }
-    }
-  ]);
-});
-
-
-autoTable(doc, {
-  startY: y,
-  body,
-  theme: "grid",
-  styles: {
-    fontSize: 9,
-    cellPadding: 4,
-    overflow: "linebreak",
-    valign: "top"
-  },
-  columnStyles: {
-    0: { cellWidth: 270 }
-  }
-});
-
-
-      y = doc.lastAutoTable.finalY + 8;
+      y = doc.lastAutoTable.finalY + 10;
 
       if (y > 180) {
         doc.addPage();
