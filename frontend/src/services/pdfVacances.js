@@ -10,59 +10,52 @@ export function generateVacancesPdf(planning, group) {
   const tableData = [];
 
   planning.forEach(day => {
+    // 🌞 Ligne MATIN
     tableData.push([
-      {
-        content: `${day.date}\n🌞 Matin`,
-        styles: { fontStyle: "bold" }
-      },
-      {
-        content: day.morning || "-",
-      }
+      day.date,
+      "Matin",
+      day.morning || "-"
     ]);
 
+    // 🌙 Ligne APRÈS-MIDI
     tableData.push([
-      {
-        content: `${day.date}\n🌙 Après-midi`,
-        styles: { fontStyle: "bold" }
-      },
-      {
-        content: day.afternoon || "-",
-      }
+      day.date,
+      "Après-midi",
+      day.afternoon || "-"
     ]);
   });
 
   autoTable(doc, {
-  startY: 30,
-  head: [["Jour / Moment", "Activité"]],
-  body: tableData,
+    startY: 30,
 
-  styles: {
-    fontSize: 10,
-    cellPadding: 6,
-    valign: "top",
-    overflow: "linebreak",
-  },
+    head: [["Jour", "Moment", "Activité"]],
 
-  columnStyles: {
-    0: { cellWidth: 55 },
-    1: { cellWidth: 135 },
-  },
+    body: tableData,
 
-  bodyStyles: {
-    minCellHeight: 16,
-  },
+    styles: {
+      fontSize: 10,
+      cellPadding: 6,
+      valign: "top",
+      overflow: "linebreak",
+    },
 
-  didParseCell: function (data) {
-    if (data.row.raw[0].content.includes("🌞")) {
-      data.cell.styles.fillColor = [230, 242, 255]; // bleu clair matin
+    columnStyles: {
+      0: { cellWidth: 35 },  // Jour
+      1: { cellWidth: 35 },  // Moment
+      2: { cellWidth: 120 }, // Activité
+    },
+
+    didParseCell: function (data) {
+      if (data.column.index === 1) {
+        if (data.cell.raw === "Matin") {
+          data.cell.styles.fillColor = [230, 242, 255];
+        }
+        if (data.cell.raw === "Après-midi") {
+          data.cell.styles.fillColor = [255, 240, 230];
+        }
+      }
     }
-    if (data.row.raw[0].content.includes("🌙")) {
-      data.cell.styles.fillColor = [255, 240, 230]; // beige clair aprem
-    }
-  }
-});
+  });
 
   doc.save(`planning-vacances-${group}.pdf`);
 }
-
-
