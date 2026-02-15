@@ -1,62 +1,49 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-export default function generateACMPdf(planning) {
-  const doc = new jsPDF({ orientation: "portrait" });
+export default function generateACMPdf({ group, weeks }) {
+  if (!group) {
+    throw new Error("Groupe manquant");
+  }
 
-  doc.setFontSize(18);
-  doc.text("Planning ACM", 14, 20);
+  if (!weeks || !Array.isArray(weeks)) {
+    throw new Error("Weeks invalide");
+  }
 
-  const tableData = [];
+  const doc = new jsPDF();
 
-  planning.forEach(day => {
-    tableData.push([
-      {
-        content: `${day.date}\n🌞 Matin`,
-        styles: { fontStyle: "bold" }
-      },
-      day.morning || "-"
-    ]);
+  // ===== TITRE =====
+  doc.setFontSize(16);
+  doc.text("Planning ACM", 14, 15);
 
-    tableData.push([
-      {
-        content: `${day.date}\n🌙 Après-midi`,
-        styles: { fontStyle: "bold" }
-      },
-      day.afternoon || "-"
-    ]);
-  });
+  doc.setFontSize(11);
+  doc.text(`Groupe : ${group}`, 14, 23);
+
+  // ===== TABLE =====
+  const body = weeks.map((week) => [
+    `${week.label}\n${new Date(week.date).toLocaleDateString("fr-FR")}`,
+    week.morning || "",
+    week.afternoon || ""
+  ]);
 
   autoTable(doc, {
-    startY: 30,
-    head: [["Jour / Moment", "Activité"]],
-    body: tableData,
-
+    startY: 32,
+    head: [["Semaine", "Matin", "Après-midi"]],
+    body,
     styles: {
-      fontSize: 10,
-      cellPadding: 6,
-      valign: "top",
-      overflow: "linebreak",
+      fontSize: 9,
+      cellPadding: 3,
+      valign: "top"
     },
-
+    headStyles: {
+      fillColor: [41, 128, 185]
+    },
     columnStyles: {
-      0: { cellWidth: 55 },
-      1: { cellWidth: 135 },
-    },
-
-    bodyStyles: {
-      minCellHeight: 16,
-    },
-
-    didParseCell: function (data) {
-      if (data.row.raw[0].content.includes("🌞")) {
-        data.cell.styles.fillColor = [230, 242, 255];
-      }
-      if (data.row.raw[0].content.includes("🌙")) {
-        data.cell.styles.fillColor = [255, 240, 230];
-      }
+      0: { cellWidth: 40 },
+      1: { cellWidth: 70 },
+      2: { cellWidth: 70 }
     }
   });
 
-  doc.save("planning-acm.pdf");
+  doc.save(`planning-acm-${group}.pdf`);
 }
