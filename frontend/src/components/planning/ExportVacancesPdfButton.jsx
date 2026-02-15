@@ -22,23 +22,24 @@ export default function ExportVacancesPdfButton({
       format: "a4"
     });
 
-    /* 🔶 BANNIÈRE */
-    doc.setFillColor(249, 115, 22);
+    /* ===== EN-TÊTE PROFESSIONNEL ===== */
+    doc.setFillColor(40, 40, 40);
     doc.rect(0, 0, 297, 18, "F");
 
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(15);
-    doc.text(`Planning Vacances — ${group}`, 14, 11);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(14);
+    doc.text(`PLANNING VACANCES — ${group}`, 14, 11);
 
     doc.setFontSize(9);
-    doc.text(`Du ${startDate} au ${endDate}`, 14, 16);
+    doc.text(`Du ${startDate} au ${endDate}`, 220, 11);
 
     let y = 25;
 
     weeks.forEach(week => {
+      doc.setTextColor(0, 0, 0);
       doc.setFontSize(11);
       doc.text(`Semaine ${week.index}`, 14, y);
-      y += 5;
+      y += 6;
 
       const head = [
         week.days.map(d =>
@@ -52,24 +53,18 @@ export default function ExportVacancesPdfButton({
 
       const morningRow = week.days.map(d => {
         const a = activities[d.iso] || {};
-        return a.matin || "-";
+        return `MATIN\n\n${a.matin || "-"}`;
       });
 
       const afternoonRow = week.days.map(d => {
         const a = activities[d.iso] || {};
-        return a.apresMidi || "-";
+        return `APRÈS-MIDI\n\n${a.apresMidi || "-"}`;
       });
 
       autoTable(doc, {
         startY: y,
-
         head,
-
-        body: [
-          morningRow,
-          afternoonRow
-        ],
-
+        body: [morningRow, afternoonRow],
         theme: "grid",
 
         styles: {
@@ -78,11 +73,11 @@ export default function ExportVacancesPdfButton({
           overflow: "linebreak",
           valign: "top",
           lineWidth: 0.4,
-          lineColor: [60, 60, 60]
+          lineColor: [80, 80, 80]
         },
 
         headStyles: {
-          fillColor: [240, 240, 240],
+          fillColor: [230, 230, 230],
           textColor: [0, 0, 0],
           fontStyle: "bold"
         },
@@ -90,21 +85,38 @@ export default function ExportVacancesPdfButton({
         didParseCell: function (data) {
           if (data.section === "body") {
             if (data.row.index === 0) {
-              // Ligne MATIN légèrement grisée
-              data.cell.styles.fillColor = [248, 249, 250];
+              // MATIN légèrement grisé
+              data.cell.styles.fillColor = [245, 247, 250];
+              data.cell.styles.fontStyle = "bold";
+            }
+            if (data.row.index === 1) {
+              // APRÈS-MIDI fond blanc mais titre en gras
               data.cell.styles.fontStyle = "bold";
             }
           }
         }
       });
 
-      y = doc.lastAutoTable.finalY + 10;
+      y = doc.lastAutoTable.finalY + 12;
 
       if (y > 180) {
         doc.addPage();
         y = 25;
       }
     });
+
+    /* ===== NUMÉRO DE PAGE ===== */
+    const pageCount = doc.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setTextColor(120, 120, 120);
+      doc.text(
+        `Page ${i} / ${pageCount}`,
+        270,
+        200
+      );
+    }
 
     doc.save(`planning-vacances-${group}.pdf`);
   }
