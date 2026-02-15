@@ -50,30 +50,64 @@ export default function ExportVacancesPdfButton({
         )
       ];
 
-      const body = [
-        week.days.map(d => {
-          const a = activities[d.iso];
-          if (!a) return "";
-          return `Matin : ${a.matin || ""}\nAprès-midi : ${a.apresMidi || ""}`;
-        })
-      ];
+     const body = [];
 
-      autoTable(doc, {
-        startY: y,
-        head,
-        body,
-        theme: "grid",
-        styles: {
-          fontSize: 9,
-          cellPadding: 3,
-          textColor: [0, 0, 0],
-          valign: "top"
-        },
-        headStyles: {
-          fillColor: [255, 237, 213],
-          textColor: [0, 0, 0]
-        }
-      });
+week.days.forEach(d => {
+  const a = activities[d.iso] || {};
+
+  body.push([
+    {
+      content: "🌞 MATIN",
+      styles: {
+        fillColor: [219, 234, 254],
+        fontStyle: "bold",
+        halign: "center"
+      }
+    }
+  ]);
+
+  body.push([
+    {
+      content: a.matin || "-",
+      styles: { valign: "top" }
+    }
+  ]);
+
+  body.push([
+    {
+      content: "🌙 APRÈS-MIDI",
+      styles: {
+        fillColor: [254, 226, 226],
+        fontStyle: "bold",
+        halign: "center"
+      }
+    }
+  ]);
+
+  body.push([
+    {
+      content: a.apresMidi || "-",
+      styles: { valign: "top" }
+    }
+  ]);
+});
+
+
+autoTable(doc, {
+  startY: y,
+  body,
+  theme: "grid",
+  styles: {
+    fontSize: 9,
+    cellPadding: 5,
+    overflow: "linebreak",
+    textColor: [0, 0, 0]
+  },
+  columnStyles: {
+    0: { cellWidth: 270 }
+  }
+});
+
 
       y = doc.lastAutoTable.finalY + 8;
 
