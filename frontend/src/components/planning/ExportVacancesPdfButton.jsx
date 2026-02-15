@@ -22,23 +22,23 @@ export default function ExportVacancesPdfButton({
       format: "a4"
     });
 
-    /* 🟧 BANNIÈRE */
+    /* 🔶 BANNIÈRE */
     doc.setFillColor(249, 115, 22);
-    doc.rect(0, 0, 297, 20, "F");
+    doc.rect(0, 0, 297, 18, "F");
 
     doc.setTextColor(0, 0, 0);
-    doc.setFontSize(16);
-    doc.text(`Planning Vacances — ${group}`, 14, 13);
+    doc.setFontSize(15);
+    doc.text(`Planning Vacances — ${group}`, 14, 11);
 
-    doc.setFontSize(10);
-    doc.text(`Du ${startDate} au ${endDate}`, 14, 18);
+    doc.setFontSize(9);
+    doc.text(`Du ${startDate} au ${endDate}`, 14, 16);
 
-    let y = 28;
+    let y = 25;
 
     weeks.forEach(week => {
-      doc.setFontSize(12);
+      doc.setFontSize(11);
       doc.text(`Semaine ${week.index}`, 14, y);
-      y += 6;
+      y += 5;
 
       const head = [
         week.days.map(d =>
@@ -50,73 +50,59 @@ export default function ExportVacancesPdfButton({
         )
       ];
 
-      const body = [
-        week.days.map(d => {
-          const a = activities[d.iso] || {};
+      const morningRow = week.days.map(d => {
+        const a = activities[d.iso] || {};
+        return a.matin || "-";
+      });
 
-          return {
-            content:
-              "🌞 MATIN\n\n" +
-              (a.matin || "-") +
-              "\n\n\n━━━━━━━━━━━━━━━━━━━━\n\n" +
-              "🌙 APRÈS-MIDI\n\n" +
-              (a.apresMidi || "-"),
-            styles: {
-              valign: "top"
-            }
-          };
-        })
-      ];
+      const afternoonRow = week.days.map(d => {
+        const a = activities[d.iso] || {};
+        return a.apresMidi || "-";
+      });
 
       autoTable(doc, {
-  startY: y,
-  head,
-  body,
-  theme: "grid",
+        startY: y,
 
-  styles: {
-    fontSize: 9,
-    cellPadding: 6,
-    overflow: "linebreak",
-    textColor: [0, 0, 0],
-    valign: "top",
-    lineWidth: 0.3,
-    lineColor: [0, 0, 0]
-  },
+        head,
 
-  headStyles: {
-    fillColor: [240, 240, 240],
-    textColor: [0, 0, 0],
-    fontStyle: "bold"
-  },
+        body: [
+          morningRow,
+          afternoonRow
+        ],
 
-  didDrawCell: function (data) {
-    if (data.section === "body") {
-      const { x, y, width, height } = data.cell;
+        theme: "grid",
 
-      const content = data.cell.raw.content || "";
+        styles: {
+          fontSize: 9,
+          cellPadding: 6,
+          overflow: "linebreak",
+          valign: "top",
+          lineWidth: 0.4,
+          lineColor: [60, 60, 60]
+        },
 
-      if (content.includes("🌞 MATIN")) {
-        // ligne horizontale interne
-        doc.setDrawColor(120, 120, 120);
-        doc.setLineWidth(0.5);
-        doc.line(
-          x + 2,
-          y + height / 2,
-          x + width - 2,
-          y + height / 2
-        );
-      }
-    }
-  }
-});
+        headStyles: {
+          fillColor: [240, 240, 240],
+          textColor: [0, 0, 0],
+          fontStyle: "bold"
+        },
 
+        didParseCell: function (data) {
+          if (data.section === "body") {
+            if (data.row.index === 0) {
+              // Ligne MATIN légèrement grisée
+              data.cell.styles.fillColor = [248, 249, 250];
+              data.cell.styles.fontStyle = "bold";
+            }
+          }
+        }
+      });
 
       y = doc.lastAutoTable.finalY + 10;
 
       if (y > 180) {
         doc.addPage();
-        y = 28;
+        y = 25;
       }
     });
 
