@@ -69,35 +69,48 @@ export default function ExportVacancesPdfButton({
       ];
 
       autoTable(doc, {
-        startY: y,
-        head,
-        body,
-        theme: "grid",
+  startY: y,
+  head,
+  body,
+  theme: "grid",
 
-        styles: {
-          fontSize: 9,
-          cellPadding: 5,
-          overflow: "linebreak",
-          textColor: [0, 0, 0],
-          valign: "top"
-        },
+  styles: {
+    fontSize: 9,
+    cellPadding: 6,
+    overflow: "linebreak",
+    textColor: [0, 0, 0],
+    valign: "top",
+    lineWidth: 0.3,
+    lineColor: [0, 0, 0]
+  },
 
-        headStyles: {
-          fillColor: [255, 237, 213],
-          textColor: [0, 0, 0],
-          fontStyle: "bold"
-        },
+  headStyles: {
+    fillColor: [240, 240, 240],
+    textColor: [0, 0, 0],
+    fontStyle: "bold"
+  },
 
-        didParseCell: function (data) {
-          if (data.section === "body") {
-            const text = data.cell.raw.content || "";
+  didDrawCell: function (data) {
+    if (data.section === "body") {
+      const { x, y, width, height } = data.cell;
 
-            if (text.includes("🌞 MATIN")) {
-              data.cell.styles.fillColor = [219, 234, 254]; // bleu clair
-            }
-          }
-        }
-      });
+      const content = data.cell.raw.content || "";
+
+      if (content.includes("🌞 MATIN")) {
+        // ligne horizontale interne
+        doc.setDrawColor(120, 120, 120);
+        doc.setLineWidth(0.5);
+        doc.line(
+          x + 2,
+          y + height / 2,
+          x + width - 2,
+          y + height / 2
+        );
+      }
+    }
+  }
+});
+
 
       y = doc.lastAutoTable.finalY + 10;
 
