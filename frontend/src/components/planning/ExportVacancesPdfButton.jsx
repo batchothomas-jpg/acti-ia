@@ -50,7 +50,24 @@ export default function ExportVacancesPdfButton({
         )
       ];
 
-     const body = [];
+ const body = [
+  week.days.map(d => {
+    const a = activities[d.iso] || {};
+
+    return {
+      content:
+        "🌞 MATIN\n\n" +
+        (a.matin || "-") +
+        "\n\n──────────────\n\n" +
+        "🌙 APRÈS-MIDI\n\n" +
+        (a.apresMidi || "-"),
+      styles: {
+        valign: "top"
+      }
+    };
+  })
+];
+
 
 week.days.forEach(d => {
   const a = activities[d.iso] || {};
@@ -99,9 +116,9 @@ autoTable(doc, {
   theme: "grid",
   styles: {
     fontSize: 9,
-    cellPadding: 5,
+    cellPadding: 4,
     overflow: "linebreak",
-    textColor: [0, 0, 0]
+    valign: "top"
   },
   columnStyles: {
     0: { cellWidth: 270 }
